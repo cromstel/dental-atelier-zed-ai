@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-family: Inter, 'Helvetica Neue', Arial, sans-serif;
+  color: #333333;
+  background: #f9f9f9;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+:focus-visible {
+  outline: 3px solid #79b4f9;
+  outline-offset: 3px;
+}
+
+::selection {
+  color: #ffffff;
+  background: #0b3d91;
+}

@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id           Int         @id @default(autoincrement())
+  name         String?
+  email        String      @unique
+  password     String?
+  role         UserRole    @default(USER)
+  appointments Appointment[]
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+}
+
+model Appointment {
+  id        Int               @id @default(autoincrement())
+  user      User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId    Int?
+  firstName String
+  lastName  String
+  email     String
+  phone     String?
+  dateTime  DateTime
+  notes     String?           @db.Text
+  status    AppointmentStatus @default(PENDING)
+  createdAt DateTime          @default(now())
+}
+
+model Testimonial {
+  id        Int      @id @default(autoincrement())
+  author    String
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+}
+
+model GalleryImage {
+  id        Int      @id @default(autoincrement())
+  title     String?
+  url       String
+  altText   String?
+  category  String?
+  createdAt DateTime @default(now())
+}
+
+model ContactMessage {
+  id          Int      @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  email       String
+  phone       String?
+  message     String   @db.Text
+  inquiryType String   @default("GENERAL")
+  createdAt   DateTime @default(now())
+}
+
+model Faq {
+  id       Int    @id @default(autoincrement())
+  question String @db.VarChar(500)
+  answer   String @db.Text
+}
+
+model Setting {
+  id    Int    @id @default(autoincrement())
+  key   String @unique
+  value String @db.Text
+}

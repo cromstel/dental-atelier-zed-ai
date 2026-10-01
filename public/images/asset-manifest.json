@@ -1,0 +1,252 @@
+[
+  {
+    "file": "/images/brand-dental-atelier-logo-white.webp",
+    "source": "https://www.dentalatelier.co/_design/logo-white%EF%B9%96dev=x.png",
+    "page": "https://www.dentalatelier.co/",
+    "alt": "",
+    "width": 225,
+    "height": 65,
+    "sourceFormat": "PNG",
+    "webpBytes": 2332
+  },
+  {
+    "file": "/images/hero-sexy-powerful-smile-slide-02.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/1-2.jpg",
+    "page": "https://www.dentalatelier.co/",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 89464
+  },
+  {
+    "file": "/images/hero-comfort-self-confidence-slide-03.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/2-3.jpg",
+    "page": "https://www.dentalatelier.co/",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 22094
+  },
+  {
+    "file": "/images/hero-looking-young-feeling-healthy-slide-02.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/3-2.jpg",
+    "page": "https://www.dentalatelier.co/",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 61714
+  },
+  {
+    "file": "/images/about-michal-siakel-portrait.webp",
+    "source": "https://www.dentalatelier.co/_files/miso.jpg",
+    "page": "https://www.dentalatelier.co/about-us.html",
+    "alt": "Michal Siakel",
+    "width": 393,
+    "height": 512,
+    "sourceFormat": "JPEG",
+    "webpBytes": 13926
+  },
+  {
+    "file": "/images/about-dental-lab-photo-01.webp",
+    "source": "https://www.dentalatelier.co/_files/lab/1.jpg",
+    "page": "https://www.dentalatelier.co/about-us.html",
+    "alt": "",
+    "width": 1280,
+    "height": 720,
+    "sourceFormat": "JPEG",
+    "webpBytes": 34362
+  },
+  {
+    "file": "/images/about-dental-lab-photo-02.webp",
+    "source": "https://www.dentalatelier.co/_files/lab/2.jpg",
+    "page": "https://www.dentalatelier.co/about-us.html",
+    "alt": "",
+    "width": 1280,
+    "height": 720,
+    "sourceFormat": "JPEG",
+    "webpBytes": 48762
+  },
+  {
+    "file": "/images/about-dental-lab-photo-03.webp",
+    "source": "https://www.dentalatelier.co/_files/lab/3.jpg",
+    "page": "https://www.dentalatelier.co/about-us.html",
+    "alt": "",
+    "width": 1280,
+    "height": 720,
+    "sourceFormat": "JPEG",
+    "webpBytes": 32456
+  },
+  {
+    "file": "/images/about-dental-lab-photo-04.webp",
+    "source": "https://www.dentalatelier.co/_files/lab/4.jpg",
+    "page": "https://www.dentalatelier.co/about-us.html",
+    "alt": "",
+    "width": 1280,
+    "height": 720,
+    "sourceFormat": "JPEG",
+    "webpBytes": 48394
+  },
+  {
+    "file": "/images/about-dental-lab-photo-05.webp",
+    "source": "https://www.dentalatelier.co/_files/lab/5.jpg",
+    "page": "https://www.dentalatelier.co/about-us.html",
+    "alt": "",
+    "width": 1280,
+    "height": 720,
+    "sourceFormat": "JPEG",
+    "webpBytes": 37852
+  },
+  {
+    "file": "/images/about-dental-lab-photo-06.webp",
+    "source": "https://www.dentalatelier.co/_files/lab/6.jpg",
+    "page": "https://www.dentalatelier.co/about-us.html",
+    "alt": "",
+    "width": 1280,
+    "height": 720,
+    "sourceFormat": "JPEG",
+    "webpBytes": 25234
+  },
+  {
+    "file": "/images/portfolio-smile-before.webp",
+    "source": "https://www.dentalatelier.co/_files/content/_before.jpg",
+    "page": "https://www.dentalatelier.co/portfolio.html",
+    "alt": "",
+    "width": 500,
+    "height": 335,
+    "sourceFormat": "JPEG",
+    "webpBytes": 18764
+  },
+  {
+    "file": "/images/portfolio-smile-after.webp",
+    "source": "https://www.dentalatelier.co/_files/content/_after.jpg",
+    "page": "https://www.dentalatelier.co/portfolio.html",
+    "alt": "",
+    "width": 500,
+    "height": 335,
+    "sourceFormat": "JPEG",
+    "webpBytes": 18180
+  },
+  {
+    "file": "/images/hero-sexy-powerful-smile-slide-01.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/1-1.jpg",
+    "page": "https://www.dentalatelier.co/sexy-and-powerful-smile.html",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 55162
+  },
+  {
+    "file": "/images/hero-sexy-powerful-smile-slide-03.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/1-3.jpg",
+    "page": "https://www.dentalatelier.co/sexy-and-powerful-smile.html",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 82046
+  },
+  {
+    "file": "/images/hero-sexy-powerful-smile-slide-04.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/1-4.jpg",
+    "page": "https://www.dentalatelier.co/sexy-and-powerful-smile.html",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 63066
+  },
+  {
+    "file": "/images/hero-comfort-self-confidence-slide-01.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/2-1.jpg",
+    "page": "https://www.dentalatelier.co/comfort-and-self-confidence.html",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 54608
+  },
+  {
+    "file": "/images/hero-comfort-self-confidence-slide-02.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/2-2.jpg",
+    "page": "https://www.dentalatelier.co/comfort-and-self-confidence.html",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 35414
+  },
+  {
+    "file": "/images/hero-comfort-self-confidence-slide-04.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/2-4.jpg",
+    "page": "https://www.dentalatelier.co/comfort-and-self-confidence.html",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 61098
+  },
+  {
+    "file": "/images/hero-looking-young-feeling-healthy-slide-01.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/3-1.jpg",
+    "page": "https://www.dentalatelier.co/looking-young-feeling-healthy.html",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 58144
+  },
+  {
+    "file": "/images/hero-looking-young-feeling-healthy-slide-03.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/3-3.jpg",
+    "page": "https://www.dentalatelier.co/looking-young-feeling-healthy.html",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 67430
+  },
+  {
+    "file": "/images/hero-looking-young-feeling-healthy-slide-04.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/3-4.jpg",
+    "page": "https://www.dentalatelier.co/looking-young-feeling-healthy.html",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 133592
+  },
+  {
+    "file": "/images/hero-smile-check-slide-01.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/4-1.jpg",
+    "page": "https://www.dentalatelier.co/smile-check-form.html",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 46168
+  },
+  {
+    "file": "/images/hero-smile-check-slide-02.webp",
+    "source": "https://www.dentalatelier.co/_files/_slider/4-2.jpg",
+    "page": "https://www.dentalatelier.co/smile-check-form.html",
+    "alt": "",
+    "width": 690,
+    "height": 690,
+    "sourceFormat": "JPEG",
+    "webpBytes": 69492
+  },
+  {
+    "file": "/images/site-background.webp",
+    "source": "https://www.dentalatelier.co/_design/bg.jpg",
+    "page": "https://www.dentalatelier.co/_css/bootstrap_custom.css",
+    "alt": "",
+    "width": 2000,
+    "height": 1000,
+    "sourceFormat": "JPEG",
+    "webpBytes": 10854
+  }
+]
