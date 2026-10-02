@@ -12,7 +12,7 @@ jest.mock('../lib/prisma', () => ({
 import handler from '../pages/api/admin/page-content';
 import { requireAdmin } from '../lib/admin-auth';
 import { prisma } from '../lib/prisma';
-import { pages } from '../lib/site-content';
+import { homePageContent, pages } from '../lib/site-content';
 
 function createResponse() {
   return {
@@ -70,6 +70,24 @@ describe('admin page content API', () => {
     expect(res.revalidatedPath).toBe('/portfolio');
     expect(res.statusCode).toBe(200);
     expect(res.body).toMatchObject({ slug: 'portfolio', page, revalidated: true });
+  });
+
+  it('revalidates homepage edits at the root path', async () => {
+    requireAdmin.mockResolvedValue({ user: { role: 'ADMIN' } });
+    prisma.setting.upsert.mockResolvedValue({ id: 2 });
+    const res = createResponse();
+    const page = { ...homePageContent, title: 'Dental Atelier | New home title' };
+
+    await handler({ method: 'PUT', body: { slug: 'home', ...page } }, res);
+
+    expect(prisma.setting.upsert).toHaveBeenCalledWith({
+      where: { key: 'page-content:home' },
+      update: { value: JSON.stringify(page) },
+      create: { key: 'page-content:home', value: JSON.stringify(page) },
+    });
+    expect(res.revalidatedPath).toBe('/');
+    expect(res.statusCode).toBe(200);
+    expect(res.body.page.title).toBe('Dental Atelier | New home title');
   });
 
   it('rejects unsupported page slugs', async () => {

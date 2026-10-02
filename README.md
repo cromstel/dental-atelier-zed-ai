@@ -61,6 +61,10 @@ The site is available at `http://localhost:3000`. The admin sign-in is at `/admi
 
 To refresh the image collection, install Pillow with `python -m pip install Pillow`, then run `python scripts/download_site_images.py`. The importer discovers same-site page/CSS images, converts them in memory to WebP, writes descriptive filenames, and does not retain downloaded originals.
 
+## Release and security
+
+Releases use Semantic Versioning. See [CHANGELOG.md](CHANGELOG.md) for release notes and [SECURITY.md](SECURITY.md) for supported versions and private vulnerability reporting. Dependabot checks npm dependencies and GitHub Actions weekly.
+
 ## CI and container delivery
 
 GitHub Actions runs dependency installation, Prisma Client generation, MySQL migrations, lint, tests, and a production build for pull requests and pushes to `main`. A successful push to `main` also publishes a Docker image tagged with the commit SHA and `latest` to GitHub Container Registry. The workflow does not deploy the image to a live host; connect the published image to the chosen runtime and configure production environment variables before enabling live rollout. Build and run the image locally with `docker build -t dental-atelier .` and `docker run -p 3000:3000 -e DATABASE_URL=... -e NEXTAUTH_URL=... -e NEXTAUTH_SECRET=... dental-atelier`.

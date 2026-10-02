@@ -10,6 +10,7 @@ export default function AdminPageContent({ initialPages }) {
   const [selectedSlug, setSelectedSlug] = useState(initialPages[0]?.slug || '');
   const [status, setStatus] = useState({ kind: 'idle', message: '' });
   const selectedPage = contentPages.find((page) => page.slug === selectedSlug);
+  const isHomePage = selectedSlug === 'home';
 
   function updatePage(field, value) {
     setContentPages((current) => current.map((page) => (
@@ -77,7 +78,7 @@ export default function AdminPageContent({ initialPages }) {
           <label className="block text-sm font-medium" htmlFor="content-page">
             Page
             <select className={fieldClass} id="content-page" value={selectedSlug} onChange={(event) => { setSelectedSlug(event.target.value); setStatus({ kind: 'idle', message: '' }); }}>
-              {contentPages.map((page) => <option key={page.slug} value={page.slug}>{page.title} (/{page.slug})</option>)}
+              {contentPages.map((page) => <option key={page.slug} value={page.slug}>{page.slug === 'home' ? 'Home (/)' : `${page.title} (/${page.slug})`}</option>)}
             </select>
           </label>
           {selectedPage && (
@@ -96,14 +97,16 @@ export default function AdminPageContent({ initialPages }) {
               </label>
               {selectedPage.sections.map((section, index) => (
                 <fieldset className="space-y-4 rounded-lg border border-gray-200 p-4" key={`${selectedSlug}-${index}`}>
-                  <legend className="px-2 text-sm font-semibold text-brand">Section {index + 1}</legend>
-                  <label className="block text-sm font-medium" htmlFor={`section-title-${index}`}>
-                    Heading
-                    <input className={fieldClass} id={`section-title-${index}`} maxLength={160} required value={section.title} onChange={(event) => updateSection(index, 'title', event.target.value)} />
-                  </label>
+                  <legend className="px-2 text-sm font-semibold text-brand">{isHomePage ? section.title : `Section ${index + 1}`}</legend>
+                  {!isHomePage && (
+                    <label className="block text-sm font-medium" htmlFor={`section-title-${index}`}>
+                      Heading
+                      <input className={fieldClass} id={`section-title-${index}`} maxLength={160} required value={section.title} onChange={(event) => updateSection(index, 'title', event.target.value)} />
+                    </label>
+                  )}
                   <label className="block text-sm font-medium" htmlFor={`section-body-${index}`}>
-                    Copy
-                    <textarea className={fieldClass} id={`section-body-${index}`} maxLength={4000} required rows={4} value={section.body} onChange={(event) => updateSection(index, 'body', event.target.value)} />
+                    {isHomePage ? section.title : 'Copy'}
+                    <textarea className={fieldClass} id={`section-body-${index}`} maxLength={4000} required rows={isHomePage ? 2 : 4} value={section.body} onChange={(event) => updateSection(index, 'body', event.target.value)} />
                   </label>
                 </fieldset>
               ))}

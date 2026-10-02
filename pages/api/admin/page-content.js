@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 
       let revalidated = false;
       try {
-        await res.revalidate(`/${slug}`);
+        await res.revalidate(slug === 'home' ? '/' : `/${slug}`);
         revalidated = true;
       } catch (error) {
         console.error(`Unable to revalidate page ${slug}:`, error);

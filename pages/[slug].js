@@ -81,14 +81,16 @@ export function getStaticPaths() {
   return { paths: Object.keys(pages).map((slug) => ({ params: { slug } })), fallback: false };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, revalidateReason }) {
   if (!pages[params.slug]) return { notFound: true };
 
   let page = pages[params.slug];
-  try {
-    page = await readPageContent(params.slug);
-  } catch (error) {
-    console.error(`Unable to load editable content for ${params.slug}:`, error);
+  if (revalidateReason !== 'build') {
+    try {
+      page = await readPageContent(params.slug);
+    } catch (error) {
+      console.error(`Unable to load editable content for ${params.slug}:`, error);
+    }
   }
 
   return { props: { slug: params.slug, page }, revalidate: 60 };
