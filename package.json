@@ -15,7 +15,7 @@
     "db:seed": "prisma db seed"
   },
   "dependencies": {
-    "@prisma/client": "^5.22.0",
+    "@prisma/client": "^7.10.0",
     "bcryptjs": "^2.4.3",
     "next": "^15.5.27",
     "next-auth": "^4.24.10",
