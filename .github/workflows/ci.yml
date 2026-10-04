@@ -1,4 +1,4 @@
-name: CI and container delivery
+name: CI and shared-host delivery
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   verify:
-    name: Lint, test, and build
+    name: Lint, test, build, and package
     runs-on: ubuntu-latest
     services:
       mysql:
@@ -52,49 +52,17 @@ jobs:
         run: npm test -- --runInBand
       - name: Build production app
         run: npm run build
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Validate production container image
-        uses: docker/build-push-action@v6
+      - name: Package shared-host Node app
+        run: |
+          mkdir -p .next/standalone/.next
+          cp -R .next/static .next/standalone/.next/static
+          cp -R public .next/standalone/public
+          tar -czf dental-atelier-shared-host.tar.gz -C .next/standalone .
+      - name: Upload shared-host artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4
         with:
-          context: .
-          push: false
-          cache-from: type=gha,scope=container
-          cache-to: type=gha,mode=max,scope=container
-
-  publish-container:
-    name: Publish production container
-    needs: verify
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - name: Check out source
-        uses: actions/checkout@v4
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Prepare image metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ghcr.io/${{ github.repository }}
-          tags: |
-            type=sha,format=long
-            type=raw,value=latest,enable={{is_default_branch}}
-      - name: Build and publish image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha,scope=container
-          cache-to: type=gha,mode=max,scope=container
+          name: dental-atelier-node-${{ github.sha }}
+          path: dental-atelier-shared-host.tar.gz
+          if-no-files-found: error
+          retention-days: 14

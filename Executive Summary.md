@@ -581,4 +581,3 @@ These prompts and snippets give a starting point for generating the codebase. Ea
 ---
 
 **Sources:** Site content and structure were obtained by crawling the live site. All cited text above comes from those pages. Architectural, design token, and code suggestions are based on standard Next.js/Tailwind/Prisma practices and our UX analysis.
-

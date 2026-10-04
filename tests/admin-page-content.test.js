@@ -1,5 +1,5 @@
-jest.mock('../lib/admin-auth', () => ({ requireAdmin: jest.fn() }));
-jest.mock('../lib/prisma', () => ({
+jest.mock("../lib/admin-auth", () => ({ requireAdmin: jest.fn() }));
+jest.mock("../lib/prisma", () => ({
   prisma: {
     setting: {
       findMany: jest.fn(),
@@ -9,10 +9,11 @@ jest.mock('../lib/prisma', () => ({
   },
 }));
 
-import handler from '../pages/api/admin/page-content';
-import { requireAdmin } from '../lib/admin-auth';
-import { prisma } from '../lib/prisma';
-import { homePageContent, pages } from '../lib/site-content';
+import handler from "../pages/api/admin/page-content";
+import { requireAdmin } from "../lib/admin-auth";
+import { prisma } from "../lib/prisma";
+import { homePageContent, pages } from "../lib/site-content";
+import { readPageContent } from "../lib/page-content";
 
 function createResponse() {
   return {
@@ -36,79 +37,116 @@ function createResponse() {
   };
 }
 
-describe('admin page content API', () => {
+describe("admin page content API", () => {
   beforeEach(() => jest.clearAllMocks());
 
-  it('requires an administrator session', async () => {
+  it("requires an administrator session", async () => {
     requireAdmin.mockResolvedValue(null);
     const res = createResponse();
 
-    await handler({ method: 'GET' }, res);
+    await handler({ method: "GET" }, res);
 
     expect(res.statusCode).toBe(401);
     expect(prisma.setting.findMany).not.toHaveBeenCalled();
   });
 
-  it('validates, stores, and revalidates a supported page', async () => {
-    requireAdmin.mockResolvedValue({ user: { role: 'ADMIN' } });
+  it("validates, stores, and revalidates a supported page", async () => {
+    requireAdmin.mockResolvedValue({ user: { role: "ADMIN" } });
     prisma.setting.upsert.mockResolvedValue({ id: 1 });
     const res = createResponse();
     const page = {
-      title: 'Smile portfolio',
-      description: 'Examples of smile transformations.',
-      intro: 'See a selection of our recent work.',
+      title: "Smile portfolio",
+      description: "Examples of smile transformations.",
+      intro: "See a selection of our recent work.",
       sections: [],
     };
 
-    await handler({ method: 'PUT', body: { slug: 'portfolio', ...page } }, res);
+    await handler({ method: "PUT", body: { slug: "portfolio", ...page } }, res);
 
     expect(prisma.setting.upsert).toHaveBeenCalledWith({
-      where: { key: 'page-content:portfolio' },
+      where: { key: "page-content:portfolio" },
       update: { value: JSON.stringify(page) },
-      create: { key: 'page-content:portfolio', value: JSON.stringify(page) },
+      create: { key: "page-content:portfolio", value: JSON.stringify(page) },
     });
-    expect(res.revalidatedPath).toBe('/portfolio');
+    expect(res.revalidatedPath).toBe("/portfolio");
     expect(res.statusCode).toBe(200);
-    expect(res.body).toMatchObject({ slug: 'portfolio', page, revalidated: true });
+    expect(res.body).toMatchObject({
+      slug: "portfolio",
+      page,
+      revalidated: true,
+    });
   });
 
-  it('revalidates homepage edits at the root path', async () => {
-    requireAdmin.mockResolvedValue({ user: { role: 'ADMIN' } });
+  it("revalidates homepage edits at the root path", async () => {
+    requireAdmin.mockResolvedValue({ user: { role: "ADMIN" } });
     prisma.setting.upsert.mockResolvedValue({ id: 2 });
     const res = createResponse();
-    const page = { ...homePageContent, title: 'Dental Atelier | New home title' };
+    const page = {
+      title: "Dental Atelier | New home title",
+      description: homePageContent.description,
+      intro: homePageContent.intro,
+      sections: homePageContent.sections,
+    };
 
-    await handler({ method: 'PUT', body: { slug: 'home', ...page } }, res);
+    await handler({ method: "PUT", body: { slug: "home", ...page } }, res);
 
     expect(prisma.setting.upsert).toHaveBeenCalledWith({
-      where: { key: 'page-content:home' },
+      where: { key: "page-content:home" },
       update: { value: JSON.stringify(page) },
-      create: { key: 'page-content:home', value: JSON.stringify(page) },
+      create: { key: "page-content:home", value: JSON.stringify(page) },
     });
-    expect(res.revalidatedPath).toBe('/');
+    expect(res.revalidatedPath).toBe("/");
     expect(res.statusCode).toBe(200);
-    expect(res.body.page.title).toBe('Dental Atelier | New home title');
+    expect(res.body.page.title).toBe("Dental Atelier | New home title");
   });
 
-  it('rejects unsupported page slugs', async () => {
-    requireAdmin.mockResolvedValue({ user: { role: 'ADMIN' } });
+  it("preserves configured hero metadata when loading saved editable copy", async () => {
+    prisma.setting.findUnique.mockResolvedValue({
+      value: JSON.stringify({
+        title: "Services",
+        description: "Explore our services.",
+        intro: "We work with patients and dental professionals.",
+        sections: pages.services.sections,
+      }),
+    });
+
+    const page = await readPageContent("services");
+
+    expect(page.heroImage).toBe(pages.services.heroImage);
+    expect(page.heroAlt).toBe(pages.services.heroAlt);
+  });
+
+  it("rejects unsupported page slugs", async () => {
+    requireAdmin.mockResolvedValue({ user: { role: "ADMIN" } });
     const res = createResponse();
 
-    await handler({ method: 'PUT', body: { slug: '../admin', ...pages.services } }, res);
+    await handler(
+      { method: "PUT", body: { slug: "../admin", ...pages.services } },
+      res,
+    );
 
     expect(res.statusCode).toBe(400);
     expect(prisma.setting.upsert).not.toHaveBeenCalled();
     expect(res.revalidatedPath).toBeUndefined();
   });
 
-  it('rejects changes to the predefined section count', async () => {
-    requireAdmin.mockResolvedValue({ user: { role: 'ADMIN' } });
+  it("rejects changes to the predefined section count", async () => {
+    requireAdmin.mockResolvedValue({ user: { role: "ADMIN" } });
     const res = createResponse();
 
-    await handler({
-      method: 'PUT',
-      body: { slug: 'services', title: 'Services', description: 'Service information.', intro: 'An introduction.', sections: [] },
-    }, res);
+    await handler(
+      {
+        method: "PUT",
+        body: {
+          slug: "services",
+          title: "Services",
+          description: "Service information.",
+          intro: "An introduction.",
+          sections: [],
+        },
+      },
+      res,
+    );
 
     expect(res.statusCode).toBe(400);
     expect(prisma.setting.upsert).not.toHaveBeenCalled();

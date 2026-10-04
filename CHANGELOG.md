@@ -19,5 +19,5 @@ Initial public release.
 - Curated local WebP image assets and a repeatable image import script.
 - Jest and React Testing Library tests.
 - GitHub Actions CI for Prisma migration, lint, tests, production build, and
-  container publishing; Docker production image configuration.
+  shared-host Node.js artifact packaging.
 - Security policy and automated dependency update configuration.

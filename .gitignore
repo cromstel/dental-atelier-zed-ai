@@ -7,3 +7,6 @@ coverage/
 .DS_Store
 __pycache__/
 *.py[cod]
+.zed/
+scripts/
+tests/

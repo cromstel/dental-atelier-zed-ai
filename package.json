@@ -6,13 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint pages components lib tests prisma/seed.js next.config.js tailwind.config.js postcss.config.js jest.config.js",
+    "lint": "eslint pages components lib tests prisma/seed.js scripts/prisma.js next.config.js tailwind.config.js postcss.config.js jest.config.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev",
-    "db:deploy": "prisma migrate deploy",
-    "db:seed": "prisma db seed"
+    "db:generate": "node scripts/prisma.js generate",
+    "db:migrate": "node scripts/prisma.js migrate dev",
+    "db:deploy": "node scripts/prisma.js migrate deploy",
+    "db:seed": "node scripts/prisma.js db seed"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
@@ -26,14 +26,15 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@types/bcryptjs": "^2.4.6",
-    "@types/jest": "^29.5.14",
+    "@types/jest": "^30.0.0",
     "@types/node": "^22.9.0",
     "@types/react": "^18.3.12",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.1",
+    "eslint": "^9.39.5",
     "eslint-config-next": "^15.5.27",
-    "jest": "^29.7.0",
-    "jest-environment-jsdom": "^29.7.0",
+    "fill-range": "^7.1.1",
+    "jest": "^30.5.2",
+    "jest-environment-jsdom": "^30.5.2",
     "postcss": "^8.5.28",
     "prisma": "^5.22.0",
     "tailwindcss": "^3.4.15",
@@ -43,6 +44,13 @@
     "seed": "node prisma/seed.js"
   },
   "overrides": {
-    "postcss": "$postcss"
+    "postcss": "$postcss",
+    "braces": "file:vendor/braces"
+  },
+  "allowScripts": {
+    "@prisma/client@5.22.0": true,
+    "@prisma/engines@5.22.0": true,
+    "prisma@5.22.0": true,
+    "unrs-resolver@1.12.2": true
   }
 }
