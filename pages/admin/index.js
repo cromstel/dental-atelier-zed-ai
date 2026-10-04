@@ -11,7 +11,10 @@ export default function AdminDashboard({ appointments: initialAppointments }) {
   const [updateState, setUpdateState] = useState({ kind: "idle", message: "" });
 
   async function updateAppointmentStatus(id, status) {
-    setUpdateState({ kind: "pending", message: "Updating appointment status…" });
+    setUpdateState({
+      kind: "pending",
+      message: "Updating appointment status…",
+    });
 
     try {
       const response = await fetch("/api/admin/appointments", {
@@ -20,14 +23,25 @@ export default function AdminDashboard({ appointments: initialAppointments }) {
         body: JSON.stringify({ id, status }),
       });
       const result = await response.json();
-      if (!response.ok) throw new Error(result?.error || "Unable to update appointment status.");
+      if (!response.ok)
+        throw new Error(
+          result?.error || "Unable to update appointment status.",
+        );
 
-      setAppointments((current) => current.map((appointment) => (
-        appointment.id === result.id ? result : appointment
-      )));
-      setUpdateState({ kind: "success", message: "Appointment status updated." });
+      setAppointments((current) =>
+        current.map((appointment) =>
+          appointment.id === result.id ? result : appointment,
+        ),
+      );
+      setUpdateState({
+        kind: "success",
+        message: "Appointment status updated.",
+      });
     } catch (error) {
-      setUpdateState({ kind: "error", message: error.message || "Unable to update appointment status." });
+      setUpdateState({
+        kind: "error",
+        message: error.message || "Unable to update appointment status.",
+      });
     }
   }
 
@@ -48,22 +62,40 @@ export default function AdminDashboard({ appointments: initialAppointments }) {
             </h1>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-blue-900" href="/admin/faqs">
+            <Link
+              className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-blue-900"
+              href="/admin/faqs"
+            >
               Manage FAQs
             </Link>
-            <Link className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-blue-900" href="/admin/testimonials">
+            <Link
+              className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-blue-900"
+              href="/admin/testimonials"
+            >
               Manage testimonials
             </Link>
-            <Link className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-blue-900" href="/admin/gallery">
+            <Link
+              className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-blue-900"
+              href="/admin/gallery"
+            >
               Manage gallery
             </Link>
-            <Link className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-blue-900" href="/admin/inquiries">
+            <Link
+              className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-blue-900"
+              href="/admin/inquiries"
+            >
               View inquiries
             </Link>
-            <Link className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-blue-900" href="/admin/settings">
+            <Link
+              className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-blue-900"
+              href="/admin/settings"
+            >
               Site settings
             </Link>
-            <Link className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-blue-900" href="/admin/content">
+            <Link
+              className="rounded-md bg-brand px-4 py-2 text-sm font-semibold text-white hover:bg-blue-900"
+              href="/admin/content"
+            >
               Edit page content
             </Link>
             <button
@@ -93,7 +125,7 @@ export default function AdminDashboard({ appointments: initialAppointments }) {
             <p className="mt-6 text-gray-600">No appointment requests yet.</p>
           ) : (
             <div className="mt-6 overflow-x-auto">
-              <table className="w-full min-w-[600px] border-collapse text-left text-sm">
+              <table className="w-full min-w-150 border-collapse text-left text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 text-gray-500">
                     <th className="py-3 pr-4 font-medium">Name</th>
@@ -131,7 +163,12 @@ export default function AdminDashboard({ appointments: initialAppointments }) {
                           aria-label={`Status for ${appointment.firstName} ${appointment.lastName}`}
                           className="rounded-md border border-gray-300 bg-white px-2 py-1.5"
                           disabled={updateState.kind === "pending"}
-                          onChange={(event) => updateAppointmentStatus(appointment.id, event.target.value)}
+                          onChange={(event) =>
+                            updateAppointmentStatus(
+                              appointment.id,
+                              event.target.value,
+                            )
+                          }
                           value={appointment.status}
                         >
                           <option value="PENDING">Pending</option>

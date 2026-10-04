@@ -2,55 +2,73 @@
   "name": "dental-atelier",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run db:generate",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint pages components lib tests prisma/seed.js scripts/prisma.js next.config.js tailwind.config.js postcss.config.js jest.config.js",
+    "lint": "eslint pages components lib tests prisma/seed.ts prisma.config.ts next.config.mjs tailwind.config.cjs postcss.config.mjs jest.config.cjs",
+    "pretest": "npm run db:generate",
     "test": "jest",
     "test:watch": "jest --watch",
-    "db:generate": "node scripts/prisma.js generate",
-    "db:migrate": "node scripts/prisma.js migrate dev",
-    "db:deploy": "node scripts/prisma.js migrate deploy",
-    "db:seed": "node scripts/prisma.js db seed"
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:seed": "prisma db seed"
   },
   "dependencies": {
-    "@prisma/client": "^5.22.0",
-    "bcryptjs": "^2.4.3",
-    "next": "^15.5.27",
-    "next-auth": "^4.24.10",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@prisma/adapter-mariadb": "^7.10.0",
+    "@prisma/client": "^7.10.0",
+    "bcryptjs": "^3.0.3",
+    "mariadb": "^3.5.4",
+    "next": "^16.3.8",
+    "next-auth": "^4.24.15",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.1.0",
-    "@types/bcryptjs": "^2.4.6",
+    "@next/env": "^16.3.8",
+    "@next/eslint-plugin-next": "^16.3.8",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
     "@types/jest": "^30.0.0",
-    "@types/node": "^22.9.0",
-    "@types/react": "^18.3.12",
-    "autoprefixer": "^10.4.20",
+    "@types/node": "^24.19.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "eslint": "^9.39.5",
-    "eslint-config-next": "^15.5.27",
+    "eslint-config-next": "^16.3.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "fill-range": "^7.1.1",
+    "globals": "^17.13.0",
     "jest": "^30.5.2",
     "jest-environment-jsdom": "^30.5.2",
     "postcss": "^8.5.28",
-    "prisma": "^5.22.0",
-    "tailwindcss": "^3.4.15",
-    "typescript": "^5.7.2"
-  },
-  "prisma": {
-    "seed": "node prisma/seed.js"
+    "prisma": "^7.10.0",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3"
   },
   "overrides": {
     "postcss": "$postcss",
-    "braces": "file:vendor/braces"
+    "braces": "file:vendor/braces",
+    "deepmerge-ts": "^8.0.2",
+    "mariadb": "$mariadb",
+    "mysql2": "^3.24.5"
   },
   "allowScripts": {
-    "@prisma/client@5.22.0": true,
-    "@prisma/engines@5.22.0": true,
-    "prisma@5.22.0": true,
+    "@prisma/client@7.10.0": true,
+    "@prisma/engines@7.10.0": true,
+    "prisma@7.10.0": true,
+    "esbuild@0.28.2": true,
     "unrs-resolver@1.12.2": true
   }
 }

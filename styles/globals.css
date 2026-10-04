@@ -1,29 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.cjs";
 
 :root {
-  color-scheme: light;
-  font-family: Inter, 'Helvetica Neue', Arial, sans-serif;
-  color: #333333;
-  background: #f9f9f9;
+    color-scheme: light;
+    font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+    color: #333333;
+    background: #f9f9f9;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  min-width: 320px;
+    margin: 0;
+    min-width: 320px;
 }
 
 :focus-visible {
-  outline: 3px solid #79b4f9;
-  outline-offset: 3px;
+    outline: 3px solid #79b4f9;
+    outline-offset: 3px;
 }
 
 ::selection {
-  color: #ffffff;
-  background: #0b3d91;
+    color: #ffffff;
+    background: #0b3d91;
 }
